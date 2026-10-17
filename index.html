@@ -6,9 +6,11 @@
 <meta name="color-scheme" content="dark">
 <title>Wolt Services — dépannage informatique à Saint-Martin</title>
 <meta name="description" content="Dépannage PC à domicile et à distance, migration Windows → Linux, montage, auto-hébergement, sauvegarde et récupération de données. Wolt Services.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@300;400;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap">
+<meta name="theme-color" content="#111110">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="owl.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
 :root{
   --black:#111110; --white:#fff; --ink-soft:rgba(255,255,255,.82);
@@ -20,40 +22,40 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--black);color:var(--white);font-family:var(--mono);overflow-x:hidden;cursor:none}
+body{background:var(--black);color:var(--white);font-family:var(--mono);overflow-x:hidden;cursor:auto}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="-1"]:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:200px 200px}
-#cursor-dot{position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;background:var(--white);pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-#cursor-ring{position:fixed;top:0;left:0;width:32px;height:32px;border:1px solid rgba(255,255,255,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s ease,border-color .18s ease}
-.skip{position:absolute;left:-9999px;top:1rem;z-index:100;background:var(--white);color:var(--black);padding:.7rem 1rem}
+.skip{position:fixed;left:-9999px;top:1rem;z-index:10001;background:var(--white);color:var(--black);padding:.7rem 1rem}
 .skip:focus{left:1rem}
-.page-shell{display:flex;min-height:100vh}
+.page-shell{display:flex;align-items:flex-start;min-height:100vh}
 .sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);height:100vh;border-right:2px solid var(--white);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:2rem 0;z-index:100;background:var(--black)}
 .sidebar__logo{font-family:var(--display);font-size:.92rem;letter-spacing:.08em;writing-mode:vertical-lr;transform:rotate(180deg)}
 .sidebar__nav{display:flex;flex-direction:column;align-items:center;gap:2rem}
-.sidebar__nav a{font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;writing-mode:vertical-lr;transform:rotate(180deg);opacity:.4;transition:opacity .2s ease}
+.sidebar__nav a{font-size:.75rem;min-width:28px;min-height:44px;display:flex;align-items:center;justify-content:center;letter-spacing:.16em;text-transform:uppercase;writing-mode:vertical-lr;transform:rotate(180deg);opacity:.75;transition:opacity .2s ease}
 .sidebar__nav a:hover,.sidebar__nav a.active{opacity:1}
-.sidebar__index{font-size:.52rem;letter-spacing:.1em;writing-mode:vertical-lr;opacity:.25}
-.main{margin-left:var(--sidebar);flex:1;min-width:0;overflow:hidden;display:flex;flex-direction:column}
+.sidebar__index{font-size:.75rem;letter-spacing:.1em;writing-mode:vertical-lr;opacity:.75}
+.main{margin-left:var(--sidebar);flex:1;align-self:stretch;min-width:0;overflow:clip;display:flex;flex-direction:column}
 .rule{height:0;width:100%;border:0;border-top:2px solid var(--white)}
-[data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
-[data-reveal].visible{opacity:1;transform:none}
-.sticky-label{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;padding:.55rem 4vw;border-bottom:1px solid var(--line);background:rgba(17,17,16,.93);backdrop-filter:blur(6px);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
+/* Content is visible by default, including when scripts are unavailable. */
+[data-reveal]{opacity:1;transform:none}
+.sticky-label{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;padding:.55rem 4vw;border-bottom:1px solid var(--line);background:rgba(17,17,16,.93);backdrop-filter:blur(6px);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
 #hero{position:relative;min-height:100vh;padding:0 4vw;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
-#hero::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 55% 65% at 30% 50%,#000 30%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 55% 65% at 30% 50%,#000 30%,transparent 100%)}
+#hero::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:url('owl.jpg');background-image:image-set(url('owl.webp') type('image/webp'),url('owl.jpg') type('image/jpeg'));background-size:cover;background-repeat:no-repeat;background-position:center;opacity:.5}
+#hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(10,10,10,.92) 0%,rgba(10,10,10,.55) 32%,rgba(10,10,10,0) 60%)}
+.hero__head{position:relative;z-index:1;align-self:flex-start;padding-top:8vh}
 .hero__ghost-year{position:absolute;top:4vh;right:0;font-family:var(--display);font-size:clamp(7rem,15vw,15rem);line-height:1;-webkit-text-stroke:1px rgba(255,255,255,.07);color:transparent;pointer-events:none;user-select:none}
 .hero__topbar{position:relative;z-index:1;display:flex;justify-content:space-between;gap:2rem;padding-top:8vh;font-size:.58rem;letter-spacing:.17em;text-transform:uppercase;color:var(--ink-dim)}
-.hero__headline{position:relative;z-index:1;margin-right:-7vw;font-family:var(--display);font-size:clamp(10vw,17vw,21vw);line-height:.88;letter-spacing:-.025em;white-space:nowrap;overflow:visible}
+.hero__headline{position:relative;z-index:1;font-family:var(--display);font-size:clamp(2rem,6.8vw,6.25rem);line-height:.95;letter-spacing:-.01em;white-space:normal;color:var(--white);overflow:visible}
 .hero__headline .invert{-webkit-text-stroke:2px var(--white);color:transparent}
-.hero__sub{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;padding-bottom:6vh}
+.hero__sub{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:2rem;padding-bottom:6vh}
 .hero__tagline{max-width:56ch;font-family:var(--condensed);font-size:clamp(1.05rem,2vw,1.5rem);font-weight:300;line-height:1.45;letter-spacing:.02em;color:var(--ink-soft)}
-.hero__cta-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:1rem;flex-shrink:0}
-.hero__scroll{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:.8rem 1.5rem;border:1px solid var(--white);background:var(--white);color:var(--black);font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;cursor:none;transition:background .2s,color .2s,border-color .2s}
+.hero__cta-wrap{min-width:0;max-width:100%;display:flex;flex-direction:column;align-items:flex-end;gap:1rem;flex-shrink:0}
+.hero__scroll{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:.8rem 1.5rem;border:1px solid var(--white);background:var(--white);color:var(--black);font-size:.8rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;cursor:auto;transition:background .2s,color .2s,border-color .2s}
 .btn:hover{background:transparent;color:var(--white)}
 .btn-ghost{background:transparent;color:var(--white)}
 .btn-ghost:hover{background:var(--white);color:var(--black)}
@@ -75,7 +77,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
 #work{padding:0}
 .work__header{display:flex;align-items:baseline;justify-content:space-between;padding:6vh 4vw 4vh}
 .section-title{font-family:var(--display);font-size:clamp(2.5rem,5vw,5rem);line-height:1;letter-spacing:.015em}
-.section-meta{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+.section-meta{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
 .work__grid{display:grid;grid-template-columns:1.6fr 1fr}
 .work__item{position:relative;display:flex;min-height:38vh;flex-direction:column;justify-content:space-between;gap:2rem;overflow:hidden;padding:4.5vw 4vw;border-top:2px solid var(--white)}
 .work__item:nth-child(1){grid-column:1/-1;min-height:34vh;flex-direction:row;align-items:flex-end;gap:4vw}
@@ -94,31 +96,39 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
 .work__item-tag{position:relative;z-index:1;align-self:flex-start;margin-top:2rem;padding:.3rem .7rem;border:1px solid rgba(255,255,255,.3);font-size:.5rem;letter-spacing:.17em;text-transform:uppercase;transition:color .45s,border-color .45s}
 #services{padding:0}
 .services__body{display:grid;grid-template-columns:minmax(0,1fr) 340px}
-.services__left{padding:10vh 4vw}.services__header{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:5vh}
+.services__left{min-width:0;padding:10vh 4vw}.services__header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:5vh}
 .services__list{display:flex;flex-direction:column}
-.service-row{position:relative;display:grid;grid-template-columns:3ch minmax(0,1fr) auto 1.5rem;align-items:center;gap:1.4rem;width:100%;padding:1.45rem 0;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;cursor:none;transition:padding-left .25s ease}
-.service-row:hover,.service-row.open{padding-left:1rem}.service-row__num{font-size:.55rem;letter-spacing:.13em;color:var(--ink-dim)}
-.service-row__body{min-width:0}.service-row .title{font-family:var(--condensed);font-size:clamp(1.25rem,2.25vw,2rem);font-weight:600;line-height:1.12;letter-spacing:.015em}.service-row .desc{margin-top:.35rem;font-size:.57rem;font-weight:300;line-height:1.6;color:var(--ink-dim)}
-.tags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.35rem;list-style:none}.tag{padding:.23rem .55rem;border:1px solid rgba(255,255,255,.23);border-radius:999px;font-size:.47rem;letter-spacing:.06em;color:var(--ink-dim);white-space:nowrap}
-.service-row__arrow{font-size:1rem;color:var(--ink-dim);transition:transform .25s,color .25s}.service-row:hover .service-row__arrow,.service-row.open .service-row__arrow{color:var(--white)}.service-row.open .service-row__arrow{transform:rotate(90deg)}
-.service-panel{display:grid;grid-template-rows:0fr;border-bottom:1px solid var(--line);transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)}.service-panel.open{grid-template-rows:1fr}
-.service-panel__inner{overflow:hidden;padding:0 0 0 calc(3ch + 1.4rem);transition:padding .45s cubic-bezier(.16,1,.3,1)}.service-panel.open .service-panel__inner{padding:1.3rem 0 1.8rem calc(3ch + 1.4rem)}
-.sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.sp-block{padding-top:.8rem;border-top:1px solid var(--line)}.sp-block__label{display:block;margin-bottom:.5rem;font-size:.47rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}.sp-block__title{font-family:var(--condensed);font-size:1rem;font-weight:600;line-height:1.15}.sp-block__text{margin-top:.3rem;font-size:.55rem;font-weight:300;line-height:1.7;color:var(--ink-soft)}
-.services__right{display:flex;flex-direction:column;gap:2.6rem;padding:10vh 2.5vw;border-left:2px solid var(--white)}.srv-panel__block{display:flex;flex-direction:column;gap:.55rem}.srv-panel__label{display:block;margin-bottom:.3rem;font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}.srv-panel__heading{font-family:var(--condensed);font-size:clamp(1.2rem,1.9vw,1.55rem);font-weight:700;line-height:1.1}.srv-panel__text{font-size:.58rem;font-weight:300;line-height:1.8;color:var(--ink-soft)}.srv-panel__divider{width:100%;height:0;border:0;border-top:1px solid var(--line)}.srv-panel__list{display:flex;flex-direction:column;gap:.6rem;list-style:none}.srv-panel__list li{position:relative;padding-left:1rem;font-size:.56rem;font-weight:300;line-height:1.5;color:var(--ink-soft)}.srv-panel__list li::before{content:'—';position:absolute;left:0;color:var(--ink-dim)}.srv-panel__cta{display:inline-block;margin-top:auto;padding-bottom:.3rem;border-bottom:1px solid rgba(255,255,255,.25);font-size:.56rem;font-weight:500;letter-spacing:.17em;text-transform:uppercase;transition:border-color .2s,color .2s}.srv-panel__cta:hover{border-color:var(--white);color:var(--accent)}
-#contact{display:flex;flex-direction:column;gap:5vh;padding:10vh 4vw 6vh}.contact__info{display:grid;grid-template-columns:1fr 1fr;gap:4vw;padding-bottom:5vh;border-bottom:1px solid var(--line)}.contact__info-col{display:flex;flex-direction:column;gap:.7rem}.contact__info-label{margin-bottom:.25rem;font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}.contact__info-value{font-family:var(--condensed);font-size:clamp(1rem,1.6vw,1.3rem);letter-spacing:.03em;color:var(--ink-soft)}.contact__manifesto{align-self:flex-end;max-width:44ch;font-family:var(--condensed);font-size:clamp(1.2rem,2vw,1.7rem);font-weight:300;line-height:1.4;text-align:right;color:var(--ink-dim)}.contact__manifesto em{font-style:normal;font-weight:700;color:var(--white)}.contact__big{margin-right:-4vw;font-family:var(--display);font-size:clamp(6rem,12vw,14rem);line-height:.88;letter-spacing:-.02em;white-space:nowrap}.contact__big a{-webkit-text-stroke:2px var(--white);color:transparent;transition:color .3s}.contact__big a:hover{color:var(--white)}
-.footer-bar{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;padding-top:4vh;border-top:2px solid var(--white)}.footer-bar__left{display:flex;flex-direction:column;gap:.5rem}.footer-logo{font-family:var(--display);font-size:2.3rem;letter-spacing:.04em}.footer-tagline,.footer-copy,.footer-tooplate{font-size:.5rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-dim)}.footer-copy{color:rgba(255,255,255,.45);text-transform:none}.footer-tooplate{color:var(--ink-soft);text-transform:none}.footer-tooplate:hover{color:var(--white)}.footer-bar__center{font-family:var(--display);font-size:1rem;letter-spacing:.25em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.18)}.footer-bar__right{display:flex;align-items:flex-end;gap:1.4rem;flex-wrap:wrap}.footer-link{font-size:.53rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-dim);transition:color .2s}.footer-link:hover{color:var(--accent)}
+.service-row{position:relative;display:grid;grid-template-columns:3ch minmax(0,1fr) auto 1.5rem;align-items:center;gap:1.4rem;width:100%;padding:1.45rem 0;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;cursor:auto;transition:padding-left .25s ease}
+.service-row:hover,.service[open] .service-row{padding-left:1rem}.service-row__num{font-size:.75rem;letter-spacing:.13em;color:var(--ink-dim)}
+.service-row__body{min-width:0;overflow-wrap:anywhere;hyphens:auto}.service-row .title{font-family:var(--condensed);font-size:clamp(1.25rem,2.25vw,2rem);font-weight:600;line-height:1.12;letter-spacing:.015em}.service-row .desc{margin-top:.35rem;font-size:.875rem;font-weight:400;line-height:1.6;color:var(--ink-dim)}
+.tags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.35rem;list-style:none}.tag{padding:.23rem .55rem;border:1px solid rgba(255,255,255,.23);border-radius:999px;font-size:.7rem;letter-spacing:.06em;color:var(--ink-dim);white-space:nowrap}
+.service-row__arrow{font-size:1rem;color:var(--ink-dim);transition:transform .25s,color .25s}.service-row:hover .service-row__arrow,.service[open] .service-row__arrow{color:var(--white)}.service[open] .service-row__arrow{transform:rotate(90deg)}
+.service-row{list-style:none;cursor:pointer}.service-row::-webkit-details-marker{display:none}
+.service-panel{border-bottom:1px solid var(--line)}
+.service-panel__inner{padding:1.3rem 0 1.8rem calc(3ch + 1.4rem)}
+.sp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.sp-block{min-width:0;overflow-wrap:anywhere;hyphens:auto;padding-top:.8rem;border-top:1px solid var(--line)}.sp-block__label{display:block;margin-bottom:.5rem;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}.sp-block__title{font-family:var(--condensed);font-size:1rem;font-weight:600;line-height:1.15}.sp-block__text{margin-top:.3rem;font-size:.875rem;font-weight:300;line-height:1.7;color:var(--ink-soft)}
+.services__right{min-width:0;overflow-wrap:anywhere;hyphens:auto;display:flex;flex-direction:column;gap:2.6rem;padding:10vh 2.5vw;border-left:2px solid var(--white)}.srv-panel__block{display:flex;flex-direction:column;gap:.55rem}.srv-panel__label{display:block;margin-bottom:.3rem;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}.srv-panel__heading{font-family:var(--condensed);font-size:clamp(1.2rem,1.9vw,1.55rem);font-weight:700;line-height:1.1}.srv-panel__text{font-size:.875rem;font-weight:300;line-height:1.8;color:var(--ink-soft)}.srv-panel__divider{width:100%;height:0;border:0;border-top:1px solid var(--line)}.srv-panel__list{display:flex;flex-direction:column;gap:.6rem;list-style:none}.srv-panel__list li{position:relative;padding-left:1rem;font-size:.875rem;font-weight:400;line-height:1.5;color:var(--ink-soft)}.srv-panel__list li::before{content:'—';position:absolute;left:0;color:var(--ink-dim)}.srv-panel__cta{display:inline-block;margin-top:auto;padding-bottom:.3rem;border-bottom:1px solid rgba(255,255,255,.25);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:border-color .2s,color .2s}.srv-panel__cta:hover{border-color:var(--white);color:var(--accent)}
+#contact{display:flex;flex-direction:column;gap:5vh;padding:10vh 4vw 6vh}.contact__info{display:grid;grid-template-columns:1fr 1fr;gap:4vw;padding-bottom:5vh;border-bottom:1px solid var(--line)}.contact__info-col{display:flex;flex-direction:column;gap:.7rem}.contact__info-label{margin-bottom:.25rem;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}.contact__info-value{font-family:var(--condensed);font-size:clamp(1rem,1.6vw,1.3rem);letter-spacing:.03em;color:var(--ink-soft)}.contact__manifesto{align-self:flex-end;max-width:44ch;font-family:var(--condensed);font-size:clamp(1.2rem,2vw,1.7rem);font-weight:300;line-height:1.4;text-align:right;color:var(--ink-dim)}.contact__manifesto em{font-style:normal;font-weight:700;color:var(--white)}.contact__big{margin-right:-4vw;font-family:var(--display);font-size:clamp(6rem,12vw,14rem);line-height:.88;letter-spacing:-.02em;white-space:nowrap}.contact__big a{-webkit-text-stroke:2px var(--white);color:transparent;transition:color .3s}.contact__big a:hover{color:var(--white)}
+.footer-bar{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;padding-top:4vh;border-top:2px solid var(--white)}.footer-bar__left{display:flex;flex-direction:column;gap:.5rem}.footer-logo{font-family:var(--display);font-size:2.3rem;letter-spacing:.04em}.footer-tagline,.footer-copy,.footer-tooplate{font-size:.75rem;line-height:1.6;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-dim)}.footer-copy{color:var(--ink-dim);text-transform:none}.footer-tooplate{color:var(--ink-soft);text-transform:none}.footer-tooplate:hover{color:var(--white)}.footer-bar__center{font-family:var(--display);font-size:1rem;letter-spacing:.25em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.6)}.footer-bar__right{display:flex;align-items:flex-end;gap:1.4rem;flex-wrap:wrap}.footer-link{font-size:.75rem;display:inline-flex;align-items:center;min-height:44px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-dim);transition:color .2s}.footer-link:hover{color:var(--accent)}
+.contact__info-label--zone{margin-top:1.2rem}
+.contact__info a,.srv-panel__cta{min-height:44px;display:inline-flex;align-items:center}
+.service-row .title,.service-row .desc{display:block}
+.services__header,.footer-bar__left{min-width:0}
+.footer-copy,.footer-tooplate{overflow-wrap:anywhere}
+section[id],[id="services-title"]{scroll-margin-top:1rem}
+@media(max-width:1000px){.services__body{grid-template-columns:1fr}.services__right{border-top:2px solid var(--white);border-left:0;padding:7vh 4vw}}
+@media(max-width:768px){section[id],[id="services-title"]{scroll-margin-top:6rem}.sticky-label{position:static}.hero__sub{margin-top:2rem}#hero{min-height:calc(100svh - 4.5rem)}}
 @media(max-width:1100px){.tags{display:none}.service-row{grid-template-columns:3ch minmax(0,1fr) 1.5rem}}
 @media(max-width:900px){.work__grid{grid-template-columns:1fr}.work__item:nth-child(1){flex-direction:column;align-items:flex-start;min-height:auto}.work__item:nth-child(4){border-left:0}.work__item{border-left:0!important}.work__item-aside{align-items:flex-start;min-width:unset}.work__item-aside .work__item-desc{text-align:left}.contact__info{grid-template-columns:1fr}.contact__manifesto{align-self:flex-start;text-align:left}.footer-bar__center{display:none}}
-@media(max-width:768px){:root{--sidebar:0px}body{cursor:auto}.page-shell{flex-direction:column}.sidebar{position:sticky;top:0;inset:auto;width:100%;height:auto;min-height:0;flex-direction:row;padding:.8rem 1rem;border-right:0;border-bottom:2px solid var(--white)}.sidebar__logo{flex-shrink:0;font-size:.85rem;writing-mode:horizontal-tb;transform:none}.sidebar__nav{flex:1;flex-direction:row;justify-content:flex-end;gap:.75rem;flex-wrap:wrap}.sidebar__nav a{font-size:.52rem;letter-spacing:.1em;writing-mode:horizontal-tb;transform:none}.sidebar__index{display:none}.main{margin-left:0}.hero__topbar{padding-top:4vh}.hero__headline{font-size:clamp(15vw,20vw,25vw);white-space:normal;overflow-wrap:anywhere}.hero__sub{flex-direction:column;align-items:flex-start;gap:2rem}.hero__cta-wrap{align-items:flex-start}.services__body{grid-template-columns:1fr}.services__right{border-top:2px solid var(--white);border-left:0;padding:7vh 4vw}.service-row{grid-template-columns:2.5ch minmax(0,1fr) 1.2rem;gap:.8rem}.service-row .title{font-size:1.35rem}.service-panel__inner,.service-panel.open .service-panel__inner{padding-left:calc(2.5ch + .8rem)}.sp-grid{grid-template-columns:1fr;gap:.9rem}.contact__big{font-size:clamp(4.5rem,18vw,8rem);white-space:normal}}
-@media(max-width:520px){.hero__topbar{flex-direction:column;gap:.4rem}.sticky-label{font-size:.45rem}.about__label{display:none}.about__stats{gap:1.4rem}.stat{min-width:38%;flex:none;padding:0;border-right:0}.work__item{padding:3rem 5vw}.services__left{padding:8vh 5vw}.service-row .desc{font-size:.52rem}.footer-bar{flex-direction:column;align-items:flex-start}.footer-bar__right{gap:1rem}}
+@media(max-width:768px){:root{--sidebar:0px}body{cursor:auto}.page-shell{flex-direction:column}.sidebar{position:sticky;inset:auto;top:0;align-self:stretch;flex-wrap:wrap;width:100%;height:auto;min-height:0;flex-direction:row;padding:.8rem 1rem;border-right:0;border-bottom:2px solid var(--white)}.sidebar__logo{flex-shrink:0;font-size:.85rem;writing-mode:horizontal-tb;transform:none}.sidebar__nav{flex:1;min-width:0;flex-direction:row;justify-content:flex-end;gap:.75rem;flex-wrap:wrap}.sidebar__nav a{font-size:.75rem;min-height:44px;letter-spacing:.1em;writing-mode:horizontal-tb;transform:none}.sidebar__index{display:none}.main{margin-left:0}.hero__topbar{padding-top:4vh}.hero__headline{white-space:normal}.hero__head{padding-top:5vh}#hero::before{background-size:cover;background-position:left center}.hero__sub{flex-direction:column;align-items:flex-start;gap:2rem}.hero__cta-wrap{align-items:flex-start}.services__body{grid-template-columns:1fr}.services__right{border-top:2px solid var(--white);border-left:0;padding:7vh 4vw}.service-row{grid-template-columns:2.5ch minmax(0,1fr) 1.2rem;gap:.8rem}.service-row .title{font-size:1.35rem}.service-panel__inner{padding-left:calc(2.5ch + .8rem)}.sp-grid{grid-template-columns:minmax(0,1fr);gap:.9rem}.contact__big{font-size:clamp(4.5rem,18vw,8rem);white-space:normal}}
+@media(max-width:520px){.hero__topbar{flex-direction:column;gap:.4rem}.sticky-label{font-size:.65rem;gap:.75rem;flex-wrap:wrap}.about__label{display:none}.about__stats{gap:1.4rem}.stat{min-width:38%;flex:none;padding:0;border-right:0}.work__item{padding:3rem 5vw}.services__left{padding:8vh 5vw}.service-row .desc{font-size:.875rem}.footer-bar{flex-direction:column;align-items:flex-start}.footer-bar__right{gap:1rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<a class="skip" href="#services">Aller aux services</a>
-<div id="cursor-dot" aria-hidden="true"></div><div id="cursor-ring" aria-hidden="true"></div>
+<a class="skip" href="#services-title">Aller aux services</a>
 <div class="page-shell">
-  <aside class="sidebar">
+  <aside class="sidebar" aria-label="Navigation du site">
     <a href="#hero" class="sidebar__logo">Wolt Services</a>
     <nav class="sidebar__nav" aria-label="Navigation principale">
       <a href="#services">Services</a><a href="#contact">Contact</a>
@@ -126,9 +136,9 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
     <span class="sidebar__index">2026</span>
   </aside>
   <main class="main">
-    <section id="hero">
+    <section id="hero" aria-labelledby="hero-title">
       <span class="hero__ghost-year" aria-hidden="true">2026</span>
-      <h1 class="hero__headline" data-reveal>Wolt Services</h1>
+      <div class="hero__head" data-reveal><h1 class="hero__headline" id="hero-title">Wolt<br>Services</h1></div>
       <div class="hero__sub">
         <p class="hero__tagline" data-reveal>Dépannage PC à domicile et à distance, migration Windows → Linux, montage, auto-hébergement, sauvegarde et récupération de données.</p>
         <div class="hero__cta-wrap" data-reveal><span class="hero__scroll">↓ Faites défiler pour découvrir</span><a href="#services" class="btn">Voir les services</a></div>
@@ -136,18 +146,18 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
     </section>
     <hr class="rule">
     <div class="sticky-label"><span>§ 01 — Services</span><span>Ce que je peux faire pour vous</span></div>
-    <section id="services">
-      <div class="services__body"><div class="services__left"><div class="services__header"><h2 class="section-title" data-reveal>Services</h2><span class="section-meta">10 possibilités</span></div><div class="services__list">      <button class="service-row" type="button" data-svc="1" aria-expanded="false">
+    <section id="services" aria-labelledby="services-title">
+      <div class="services__body"><div class="services__left"><div class="services__header"><h2 class="section-title" id="services-title" tabindex="-1" data-reveal>Services</h2><span class="section-meta">10 possibilités</span></div><div class="services__list">      <details class="service" name="services"><summary class="service-row" id="service-1">
         <span class="service-row__num">01</span>
         <span class="service-row__body">
           <span class="title">Intervention sur place</span>
           <span class="desc">Réseau domestique — dépannage logiciel PC.</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">anydesk</span>
+        <span class="tags"><span class="tag">anydesk</span>
         <span class="tag">dépannage</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-1" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-1">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Avant l'intervention</span><p class="sp-block__text">On vérifie ensemble le problème et les appareils concernés.</p></div>
@@ -155,18 +165,18 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="2" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-2">
         <span class="service-row__num">02</span>
         <span class="service-row__body">
           <span class="title">Assistance à distance</span>
           <span class="desc">Télémaintenance — dépannage à distance, simple et rapide.</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">anydesk</span>
+        <span class="tags"><span class="tag">anydesk</span>
         <span class="tag">dépannage</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-2" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-2">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Un accompagnement simple</span><p class="sp-block__text">Les étapes sont expliquées avant l'intervention, sans vous laisser seul devant l'écran.</p></div>
@@ -174,20 +184,20 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="3" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-3">
         <span class="service-row__num">03</span>
         <span class="service-row__body">
           <span class="title">Réparation PC</span>
           <span class="desc">Diagnostic, nettoyage, réparation à domicile.</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">windows</span>
+        <span class="tags"><span class="tag">windows</span>
         <span class="tag">hardware</span>
         <span class="tag">overclocking</span>
         <span class="tag">sav</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-3" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-3">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Un diagnostic utile</span><p class="sp-block__text">Je cherche la cause, puis je vous présente les options possibles.</p></div>
@@ -195,19 +205,19 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="4" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-4">
         <span class="service-row__num">04</span>
         <span class="service-row__body">
           <span class="title">Migration Windows → Linux</span>
           <span class="desc">Sauvegarde, installation, prise en main.</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">mint</span>
+        <span class="tags"><span class="tag">mint</span>
         <span class="tag">ubuntu</span>
         <span class="tag">sauvegarde</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-4" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-4">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Une migration préparée</span><p class="sp-block__text">Vos fichiers et vos habitudes sont pris en compte avant l'installation.</p></div>
@@ -215,20 +225,20 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="5" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-5">
         <span class="service-row__num">05</span>
         <span class="service-row__body">
           <span class="title">Formation &amp; accompagnement</span>
           <span class="desc">Initiation, migration, hardware, AI.</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">débutants</span>
+        <span class="tags"><span class="tag">débutants</span>
         <span class="tag">linux</span>
         <span class="tag">sql</span>
         <span class="tag">hardware</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-5" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-5">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">À votre rythme</span><p class="sp-block__text">La prise en main s'adapte à votre niveau et à vos questions.</p></div>
@@ -236,18 +246,18 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="6" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-6">
         <span class="service-row__num">06</span>
         <span class="service-row__body">
           <span class="title">Conseil &amp; sourcing matériel</span>
           <span class="desc">Je compare, vous achetez, éviter les pièges.</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">comparatif</span>
+        <span class="tags"><span class="tag">comparatif</span>
         <span class="tag">recommandation</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-6" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-6">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Un choix éclairé</span><p class="sp-block__text">Je compare les solutions et vous gardez la décision d'achat.</p></div>
@@ -255,20 +265,20 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="7" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-7">
         <span class="service-row__num">07</span>
         <span class="service-row__body">
           <span class="title">Montage PC sur mesure</span>
           <span class="desc">Conseil, formation, assemblage, optimisé et débloaté.</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">gaming</span>
+        <span class="tags"><span class="tag">gaming</span>
         <span class="tag">bureautique</span>
         <span class="tag">musique</span>
         <span class="tag">A.I</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-7" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-7">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Un PC adapté</span><p class="sp-block__text">La configuration suit votre usage : bureautique, jeu, musique ou création.</p></div>
@@ -276,19 +286,19 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="8" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-8">
         <span class="service-row__num">08</span>
         <span class="service-row__body">
           <span class="title">Serveurs personnels / auto-hébergement</span>
           <span class="desc">Installation de services (Nextcloud, Jellyfin, Home Assistant…).</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">nextcloud</span>
+        <span class="tags"><span class="tag">nextcloud</span>
         <span class="tag">jellyfin</span>
         <span class="tag">home assistant</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-8" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-8">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Des services utiles</span><p class="sp-block__text">Les outils installés restent compréhensibles et documentés.</p></div>
@@ -296,19 +306,19 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="9" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-9">
         <span class="service-row__num">09</span>
         <span class="service-row__body">
           <span class="title">Récupération de données</span>
           <span class="desc">Disque HS ou corrompu, sauvegarde de vos fichiers.</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">disque HS</span>
+        <span class="tags"><span class="tag">disque HS</span>
         <span class="tag">corrompu</span>
         <span class="tag">récupération</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-9" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-9">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Vos fichiers d'abord</span><p class="sp-block__text">On évalue la situation avant toute manipulation qui pourrait les modifier.</p></div>
@@ -316,19 +326,19 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
-      <button class="service-row" type="button" data-svc="10" aria-expanded="false">
+      </div></details>
+      <details class="service" name="services"><summary class="service-row" id="service-10">
         <span class="service-row__num">10</span>
         <span class="service-row__body">
           <span class="title">Sécurité / sauvegarde</span>
           <span class="desc">Mise en place de sauvegardes automatiques (cloud, NAS, disque externe).</span>
         </span>
-        <span class="tags" aria-label="Mots-clés"><span class="tag">cloud</span>
+        <span class="tags"><span class="tag">cloud</span>
         <span class="tag">nas</span>
         <span class="tag">backup</span></span>
         <span class="service-row__arrow" aria-hidden="true">→</span>
-      </button>
-      <div class="service-panel" id="svc-10" aria-hidden="true">
+      </summary>
+      <div class="service-panel" id="svc-10">
         <div class="service-panel__inner">
           <div class="sp-grid">
             <div class="sp-block"><span class="sp-block__label">Point de départ</span><span class="sp-block__title">Des sauvegardes pensées</span><p class="sp-block__text">On choisit ensemble où conserver vos copies et comment les retrouver.</p></div>
@@ -336,31 +346,35 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
             <div class="sp-block"><span class="sp-block__label">À retenir</span><span class="sp-block__title">Une explication claire</span><p class="sp-block__text">Vous repartez avec les informations nécessaires pour utiliser votre équipement sereinement.</p></div>
           </div>
         </div>
-      </div>
+      </div></details>
       </div></div>
-      <aside class="services__right" data-reveal><div class="srv-panel__block"><span class="srv-panel__label">Notre approche</span><h3 class="srv-panel__heading">On part de<br>votre problème,<br>pas du jargon.</h3><hr class="srv-panel__divider"><p class="srv-panel__text">Chaque demande commence par un échange. Nous regardons ce qui bloque avant de choisir une solution.</p></div><hr class="srv-panel__divider"><div class="srv-panel__block"><span class="srv-panel__label">Ce que vous pouvez attendre</span><ul class="srv-panel__list"><li>Un diagnostic expliqué</li><li>Des étapes adaptées à votre situation</li><li>Une intervention sur place ou à distance</li><li>Une prise en main progressive</li><li>Des conseils pour la suite</li></ul></div><a href="#contact" class="srv-panel__cta">Parler de votre besoin →</a></aside></div>
+      <aside class="services__right" aria-label="Mon approche" data-reveal><div class="srv-panel__block"><span class="srv-panel__label">Notre approche</span><h3 class="srv-panel__heading">On part de<br>votre problème,<br>pas du jargon.</h3><hr class="srv-panel__divider"><p class="srv-panel__text">Chaque demande commence par un échange. Nous regardons ce qui bloque avant de choisir une solution.</p></div><hr class="srv-panel__divider"><div class="srv-panel__block"><span class="srv-panel__label">Ce que vous pouvez attendre</span><ul class="srv-panel__list"><li>Un diagnostic expliqué</li><li>Des étapes adaptées à votre situation</li><li>Une intervention sur place ou à distance</li><li>Une prise en main progressive</li><li>Des conseils pour la suite</li></ul></div><a href="#contact" class="srv-panel__cta">Parler de votre besoin →</a></aside></div>
     </section>
     <hr class="rule">
     <div class="sticky-label"><span>§ 02 — Contact</span><span>Parlons de votre besoin</span></div>
-    <section id="contact">
-      <div class="contact__info" data-reveal><div class="contact__info-col"><span class="contact__info-label">Écrire</span><a class="contact__info-value" href="https://wa.me/[NUMERO]">WhatsApp</a><a class="contact__info-value" href="https://matrix.to/#/@[user]:matrix.org">Matrix</a><span class="contact__info-label" style="margin-top:1.2rem">Zone d'intervention</span><span class="contact__info-value">Saint-Martin<br>et à distance</span></div><div class="contact__info-col"><p class="contact__manifesto">Un souci informatique n'a pas besoin de devenir un <em>casse-tête.</em><br>On regarde ensemble ce qui peut être fait.</p></div></div>
-      <footer class="footer-bar"><div class="footer-bar__left"><span class="footer-logo">Wolt Services</span><span class="footer-tagline">Wolt Services — Saint-Martin / à distance</span><span class="footer-copy">Wolt Services · SIRET : [SIRET] · © 2026 — sans cookies, sans traqueurs. Working for independence.</span><a href="https://www.tooplate.com/view/2161-vora-bold" rel="nofollow" target="_blank" class="footer-tooplate">Base graphique adaptée depuis le modèle Vora Bold</a></div><span class="footer-bar__center" aria-hidden="true">·WS·</span><div class="footer-bar__right"><a href="https://wa.me/[NUMERO]" class="footer-link">WhatsApp</a><a href="https://matrix.to/#/@[user]:matrix.org" class="footer-link">Matrix</a><a href="#services" class="footer-link">Services</a></div></footer>
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 class="section-title" id="contact-title">Contact</h2>
+      <div class="contact__info" data-reveal><div class="contact__info-col"><span class="contact__info-label">Écrire</span><a class="contact__info-value" href="https://wa.me/[NUMERO]">WhatsApp</a><a class="contact__info-value" href="https://matrix.to/#/@[user]:matrix.org">Matrix</a><span class="contact__info-label contact__info-label--zone">Zone d'intervention</span><span class="contact__info-value">Saint-Martin<br>et à distance</span></div><div class="contact__info-col"><p class="contact__manifesto">Un souci informatique n'a pas besoin de devenir un <em>casse-tête.</em><br>On regarde ensemble ce qui peut être fait.</p></div></div>
+      <footer class="footer-bar"><div class="footer-bar__left"><span class="footer-logo">Wolt Services</span><span class="footer-tagline">Wolt Services — Saint-Martin / à distance</span><span class="footer-copy">Wolt Services · SIRET : [SIRET] · © 2026 — sans cookies, sans traqueurs. Working for independence.</span><a href="https://www.tooplate.com/view/2161-vora-bold" rel="nofollow noopener noreferrer" target="_blank" class="footer-tooplate">Base graphique adaptée depuis le modèle Vora Bold</a></div><span class="footer-bar__center" aria-hidden="true">·WS·</span><div class="footer-bar__right"><a href="https://wa.me/[NUMERO]" class="footer-link">WhatsApp</a><a href="https://matrix.to/#/@[user]:matrix.org" class="footer-link">Matrix</a><a href="#services" class="footer-link">Services</a></div></footer>
     </section>
   </main>
 </div>
 <script>
 (function(){
-  var dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring'), mx=0,my=0,rx=0,ry=0;
-  if(window.matchMedia('(pointer:fine)').matches){
-    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-    (function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
-    document.querySelectorAll('a,button,.work__item').forEach(function(el){el.addEventListener('mouseenter',function(){ring.style.transform='translate(-50%,-50%) scale(2.2)';ring.style.borderColor='rgba(255,255,255,.8)';dot.style.opacity='.3';});el.addEventListener('mouseleave',function(){ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(255,255,255,.45)';dot.style.opacity='1';});});
-  } else {dot.remove();ring.remove();}
-  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*70);obs.unobserve(e.target);}});},{threshold:.1});
-  document.querySelectorAll('[data-reveal]').forEach(function(el){obs.observe(el);});
-  document.querySelectorAll('.service-row[data-svc]').forEach(function(row){row.addEventListener('click',function(){var panel=document.getElementById('svc-'+row.dataset.svc), open=row.classList.contains('open');document.querySelectorAll('.service-row').forEach(function(r){r.classList.remove('open');r.setAttribute('aria-expanded','false');});document.querySelectorAll('.service-panel').forEach(function(p){p.classList.remove('open');p.setAttribute('aria-hidden','true');});if(!open){row.classList.add('open');row.setAttribute('aria-expanded','true');panel.classList.add('open');panel.setAttribute('aria-hidden','false');}});});
-  var links=document.querySelectorAll('.sidebar__nav a'), navObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id);});}});},{threshold:.35});
-  document.querySelectorAll('section[id]').forEach(function(s){navObs.observe(s);});
+  if (!('IntersectionObserver' in window)) return;
+  var links=document.querySelectorAll('.sidebar__nav a');
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      links.forEach(function(link){
+        var current=link.getAttribute('href')==='#'+entry.target.id;
+        link.classList.toggle('active',current);
+        if(current) link.setAttribute('aria-current','location');
+        else link.removeAttribute('aria-current');
+      });
+    });
+  },{rootMargin:'-10% 0px -55% 0px',threshold:0});
+  document.querySelectorAll('main > section[id]').forEach(function(section){observer.observe(section);});
 })();
 </script>
 </body>
